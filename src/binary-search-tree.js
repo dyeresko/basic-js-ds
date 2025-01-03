@@ -55,31 +55,33 @@ class BinarySearchTree {
 
   removeValue(tree, data) {
     if (!tree) {
-      return tree;
+      return null;
     }
     if (data < tree.data) {
       tree.left = this.removeValue(tree.left, data);
+      return tree;
     } else if (data > tree.data) {
       tree.right = this.removeValue(tree.right, data);
-    } else {
-      if (tree.left === null && tree.right === null) {
+      return tree;
+    } else if (data === tree.data) {
+      if (!tree.left && !tree.right) {
         return null;
       }
-      if (tree.right === null) {
+      if (!tree.right) {
         return tree.left;
       }
-      if (tree.left === null) {
+      if (!tree.left) {
         return tree.right;
       }
 
       let minimumChildOfRightNode = tree.right;
-      while (minimumChildOfRightNode.left && minimumChildOfRightNode) {
+      while (minimumChildOfRightNode.left) {
         minimumChildOfRightNode = minimumChildOfRightNode.left;
       }
       tree.data = minimumChildOfRightNode.data;
-      tree.right = this.removeValue(tree.right, data);
+      tree.right = this.removeValue(tree.right, minimumChildOfRightNode.data);
+      return tree;
     }
-    return tree;
   }
 
   min() {
