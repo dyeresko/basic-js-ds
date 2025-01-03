@@ -73,7 +73,7 @@ class BinarySearchTree {
       }
 
       let minimumChildOfRightNode = tree.right;
-      while (minimumChildOfRightNode.left) {
+      while (minimumChildOfRightNode.left && minimumChildOfRightNode) {
         minimumChildOfRightNode = minimumChildOfRightNode.left;
       }
       tree.data = minimumChildOfRightNode.data;
